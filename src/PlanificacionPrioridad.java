@@ -30,14 +30,20 @@ public class PlanificacionPrioridad {
         for (int i = 0; i < procesos.size(); i++) {
             Proceso proceso = procesos.get(i);
 
-            // Esperar si el proceso llega más tarde que el tiempo actual
+            // Si el proceso llega despues del tiempo actual, el sistema "espera" a que el programa este listo, pero si el 
+            // proceso llego antes del tiempo actual entonces el tiempo actual no se modifica
             if (proceso.llegada > tiempoActual) {
                 tiempoActual = proceso.llegada;
             }
 
-            // Calcular tiempos
+            /*  El tiempo espera se calcula restando el tiempo actual menos el proceso de llegada, representando cuando espero el proceso 
+            para iniciar su ejecucion desde que llego */
             tiempoEspera[i] = tiempoActual - proceso.llegada;
+            /* El tiempo actual se actualiza, agregando el tiempo de duracion, haciendo referencia a la suma de tiempos, el tiempo actual y el tiempo 
+            que ha durado el proceso anterior en ejecutarse
+             */
             tiempoActual += proceso.duracion;
+            /*El tiempo actual el el momento en el que el proceso anterior a finalizado su ejecucion */
             tiempoFinalizacion[i] = tiempoActual;
 
             // Imprimir detalles del proceso
@@ -49,6 +55,7 @@ public class PlanificacionPrioridad {
         double tiempoEsperaPromedio = 0, tiempoTurnaroundPromedio = 0;
         for (int i = 0; i < procesos.size(); i++) {
             tiempoEsperaPromedio += tiempoEspera[i];
+            /* El tiempo turnaround es todo el tiempo en el que el proceso pasa en el sistema, desde que lelgo hasta que finalizo */
             tiempoTurnaroundPromedio += tiempoFinalizacion[i] - procesos.get(i).llegada;
         }
         tiempoEsperaPromedio /= procesos.size();
