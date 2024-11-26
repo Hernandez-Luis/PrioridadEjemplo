@@ -5,7 +5,6 @@ class Proceso {
     int duracion;     // Duración de la ráfaga de CPU
     int prioridad;    // Prioridad (menor valor = mayor prioridad)
 
-    // Constructor del proceso
     public Proceso(int id, int llegada, int duracion, int prioridad) {
         this.id = id;
         this.llegada = llegada;

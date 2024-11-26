@@ -6,9 +6,12 @@ public class PlanificacionPrioridad {
 
     // Función para ordenar los procesos por prioridad y tiempo de llegada
     public static void ordenarProcesos(ArrayList<Proceso> procesos) {
+        System.out.println("\nIniciando el proceso de ordenamiento de procesos...\n");
         Collections.sort(procesos, new Comparator<Proceso>() {
             @Override
             public int compare(Proceso p1, Proceso p2) {
+                System.out.println("Comparando procesos: P1(ID:" + p1.id + ", Prioridad:" + p1.prioridad + ", Llegada:" + p1.llegada + 
+                                   ") vs P2(ID:" + p2.id + ", Prioridad:" + p2.prioridad + ", Llegada:" + p2.llegada + ")");
                 if (p1.prioridad != p2.prioridad) {
                     return Integer.compare(p1.prioridad, p2.prioridad); // Ordenar por prioridad
                 } else {
@@ -16,10 +19,15 @@ public class PlanificacionPrioridad {
                 }
             }
         });
+        System.out.println("\nProcesos ordenados:");
+        for (Proceso p : procesos) {
+            System.out.println("ID: " + p.id + ", Prioridad: " + p.prioridad + ", Llegada: " + p.llegada);
+        }
     }
 
     // Función para ejecutar los procesos y mostrar los resultados
     public static void ejecutarProcesos(ArrayList<Proceso> procesos) {
+        System.out.println("\nIniciando ejecución de procesos...\n");
         int tiempoActual = 0;
         int[] tiempoEspera = new int[procesos.size()];
         int[] tiempoFinalizacion = new int[procesos.size()];
@@ -30,40 +38,35 @@ public class PlanificacionPrioridad {
         for (int i = 0; i < procesos.size(); i++) {
             Proceso proceso = procesos.get(i);
 
-            // Si el proceso llega despues del tiempo actual, el sistema "espera" a que el programa este listo, pero si el 
-            // proceso llego antes del tiempo actual entonces el tiempo actual no se modifica
+            // System.out.println("\nProcesando el proceso ID: " + proceso.id);
             if (proceso.llegada > tiempoActual) {
+                // System.out.println("Tiempo actual (" + tiempoActual + ") es menor que el tiempo de llegada (" + proceso.llegada + "). Actualizando tiempo actual.");
                 tiempoActual = proceso.llegada;
+            } else {
+                System.out.println("Tiempo actual (" + tiempoActual + ") es suficiente para ejecutar el proceso.");
             }
 
-            /*  El tiempo espera se calcula restando el tiempo actual menos el proceso de llegada, representando cuando espero el proceso 
-            para iniciar su ejecucion desde que llego */
             tiempoEspera[i] = tiempoActual - proceso.llegada;
-            /* El tiempo actual se actualiza, agregando el tiempo de duracion, haciendo referencia a la suma de tiempos, el tiempo actual y el tiempo 
-            que ha durado el proceso anterior en ejecutarse
-             */
             tiempoActual += proceso.duracion;
-            /*El tiempo actual el el momento en el que el proceso anterior a finalizado su ejecucion */
             tiempoFinalizacion[i] = tiempoActual;
 
-            // Imprimir detalles del proceso
             System.out.printf("P%-9d%-10d%-20d%-10d%-20d\n",
                     proceso.id, proceso.prioridad, proceso.llegada, proceso.duracion, tiempoFinalizacion[i]);
+            // System.out.println("Tiempo de espera: " + tiempoEspera[i] + ", Tiempo de finalización: " + tiempoFinalizacion[i]);
         }
 
         // Calcular promedios
         double tiempoEsperaPromedio = 0, tiempoTurnaroundPromedio = 0;
         for (int i = 0; i < procesos.size(); i++) {
             tiempoEsperaPromedio += tiempoEspera[i];
-            /* El tiempo turnaround es todo el tiempo en el que el proceso pasa en el sistema, desde que lelgo hasta que finalizo */
             tiempoTurnaroundPromedio += tiempoFinalizacion[i] - procesos.get(i).llegada;
         }
         tiempoEsperaPromedio /= procesos.size();
         tiempoTurnaroundPromedio /= procesos.size();
 
-        System.out.printf("\nTiempo promedio de espera: %.2f\n", tiempoEsperaPromedio);
+        System.out.println("\nCálculos finales:");
+        System.out.printf("Tiempo promedio de espera: %.2f\n", tiempoEsperaPromedio);
         System.out.printf("Tiempo promedio de turnaround: %.2f\n", tiempoTurnaroundPromedio);
     }
-
 
 }
