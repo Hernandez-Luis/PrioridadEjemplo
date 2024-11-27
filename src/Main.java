@@ -1,31 +1,53 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        PlanificacionPrioridad planificacionPrioridad = new PlanificacionPrioridad();
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Proceso> procesos = new ArrayList<>();
+        List<Proceso> procesos = new ArrayList<>();
 
-        System.out.print("Ingrese el número de procesos: ");
-        int n = scanner.nextInt();
+        System.out.println("Ingrese el número de procesos:");
+        int numeroProcesos = scanner.nextInt();
 
-        // Leer detalles de los procesos
-        for (int i = 0; i < n; i++) {
-            System.out.println("\nIngrese los detalles del proceso " + (i + 1) + ":");
+        for (int i = 1; i <= numeroProcesos; i++) {
+            System.out.println("Ingrese los detalles para el proceso " + i + ":");
             System.out.print("Tiempo de llegada: ");
-            int llegada = scanner.nextInt();
-            System.out.print("Duración de la ráfaga de CPU: ");
-            int duracion = scanner.nextInt();
-            System.out.print("Prioridad (menor número = mayor prioridad): ");
+            int tiempoLlegada = scanner.nextInt();
+            System.out.print("Tiempo de ejecución: ");
+            int tiempoEjecucion = scanner.nextInt();
+            System.out.print("Prioridad (menor valor = mayor prioridad): ");
             int prioridad = scanner.nextInt();
 
-            procesos.add(new Proceso(i + 1, llegada, duracion, prioridad));
+            procesos.add(new Proceso(i, tiempoLlegada, tiempoEjecucion, prioridad));
         }
 
-        // Ordenar los procesos y ejecutarlos
-        PlanificacionPrioridad.ordenarProcesos(procesos);
-        PlanificacionPrioridad.ejecutarProcesos(procesos);
+        System.out.println("\nProcesos ingresados:");
+        for (Proceso p : procesos) {
+            System.out.println(p);
+        }
+
+        System.out.println("\nSeleccione el modo de planificación:");
+        System.out.println("1. Preemptiva");
+        System.out.println("2. No preemptiva");
+        int opcion = scanner.nextInt();
+
+        if (opcion == 1) {
+            planificacionPrioridad.planificacionPrioridadPreemptiva(procesos);
+        } else if (opcion == 2) {
+            planificacionPrioridad.planificacionPrioridadNoPreemptiva(procesos);
+        } else {
+            System.out.println("Opción no válida.");
+        }
 
         scanner.close();
     }
 }
+
+/*
+ P1 (Llegada: 0 ---  Ejecucion: 4 --- Prioridad: 1)
+ P2 (Llegada: 7 ---  Ejecucion: 6 --- Prioridad: 2)
+ P3 (Llegada: 9 ---  Ejecucion: 5 --- Prioridad: 1)
+ */

@@ -1,15 +1,26 @@
-// Clase para representar un proceso
-class Proceso {
-    int id;           // Identificador del proceso
-    int llegada;      // Tiempo de llegada
-    int duracion;     // Duración de la ráfaga de CPU
-    int prioridad;    // Prioridad (menor valor = mayor prioridad)
+import java.util.*;
 
-    public Proceso(int id, int llegada, int duracion, int prioridad) {
+class Proceso {
+    int id;
+    int tiempoLlegada;
+    int tiempoEjecucion;
+    int prioridad;
+    int tiempoRestante;
+    boolean completado;
+
+    Proceso(int id, int tiempoLlegada, int tiempoEjecucion, int prioridad) {
         this.id = id;
-        this.llegada = llegada;
-        this.duracion = duracion;
+        this.tiempoLlegada = tiempoLlegada;
+        this.tiempoEjecucion = tiempoEjecucion;
         this.prioridad = prioridad;
+        this.tiempoRestante = tiempoEjecucion;
+        this.completado = false;
+    }
+
+    @Override
+    public String toString() {
+        return "P" + id + " (Llegada: " + tiempoLlegada + ", Ejecución: " + tiempoEjecucion + 
+               ", Prioridad: " + prioridad + ")";
     }
 }
 
