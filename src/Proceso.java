@@ -6,7 +6,7 @@ class Proceso {
     int tiempoEjecucion;
     int prioridad;
     int tiempoRestante;
-    boolean completado;
+    boolean completado; /* El estado en el que se encuentra el proceso */
 
     Proceso(int id, int tiempoLlegada, int tiempoEjecucion, int prioridad) {
         this.id = id;

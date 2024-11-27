@@ -20,6 +20,7 @@ public class Main {
         System.out.println("Ingrese el número de procesos:");
         int numeroProcesos = scanner.nextInt();
 
+        /* Se solicitan los datos de los procesos */
         for (int i = 1; i <= numeroProcesos; i++) {
             System.out.println("Ingrese los detalles para el proceso " + i + ":");
             System.out.print("Tiempo de llegada: ");
@@ -37,6 +38,7 @@ public class Main {
             System.out.println(p);
         }
 
+        /* Se solicita elegir el modo de planificacion del algoritmo */
         System.out.println("\nSeleccione el modo de planificación:");
         System.out.println("1. Preemptiva");
         System.out.println("2. No preemptiva");

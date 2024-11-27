@@ -19,6 +19,7 @@ public class PlanificacionPrioridad {
                 }
             }
 
+            /* Realiza la impresion de los estados de cada proceso por cada segundo transcurrio dentro del proceso */
             if (procesoElegido != null) {
                 System.out.println("Segundo " + tiempo + ": Ejecutando " + procesoElegido);
                 procesoElegido.tiempoRestante--;
@@ -52,6 +53,7 @@ public class PlanificacionPrioridad {
                 }
             }
 
+            /* Realiza la impresion de los estados de cada proceso por cada segundo transcurrio dentro del proceso */
             if (procesoElegido != null) {
                 System.out.println("Segundo " + tiempo + ": Ejecutando " + procesoElegido);
                 tiempo += procesoElegido.tiempoEjecucion;
