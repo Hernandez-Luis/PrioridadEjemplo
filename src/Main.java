@@ -2,6 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/*
+ * Nombre del alumno: Luis Alberto Hernandez Ramirez
+ * Grupo: 703
+ * Nombre del profesor: Rubén García Hernández
+ * Materia: Sitemas Operativos II
+ * Algoritmo asignado: Planificaion basada en prioridades
+ */
+
 public class Main {
     public static void main(String[] args) {
 
@@ -47,6 +55,8 @@ public class Main {
 }
 
 /*
+DATOS QUE SE PUEDEN REGISTRAR PARA VISUALIZAR DE MEJOR MANERA LOS PROCESOS
+
  P1 (Llegada: 0 ---  Ejecucion: 4 --- Prioridad: 1)
  P2 (Llegada: 7 ---  Ejecucion: 6 --- Prioridad: 2)
  P3 (Llegada: 9 ---  Ejecucion: 5 --- Prioridad: 1)
